@@ -18,7 +18,9 @@ public class w1d3_Token {
 
    public int sendToReducer(String a)
    {
+       
        int noOfTokens=0;
+       for(String a:)
        if(a.compareTo("k")==0 || a.compareTo("k")>0)
        {
            noOfTokens++;
