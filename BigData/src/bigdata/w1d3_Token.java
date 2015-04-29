@@ -18,7 +18,11 @@ public class w1d3_Token {
 
    public int sendToReducer(String a)
    {
-       
+       FileReader file1 = new FileReader("doc1.txt");
+        FileReader file2 = new FileReader("doc2.txt");
+        FileReader file3 = new FileReader("doc3.txt");
+        
+        
        int noOfTokens=0;
        for(String a:)
        if(a.compareTo("k")==0 || a.compareTo("k")>0)
@@ -31,7 +35,7 @@ public class w1d3_Token {
        }
        else
        {
-           
+           noOfTokens++;
        }
    }
 
@@ -46,8 +50,6 @@ public class w1d3_Token {
         } catch (IOException e) {
             System.out.println(e);
         }
-        String a = "hello";
-
         return 0;
     }
 
@@ -55,6 +57,7 @@ public class w1d3_Token {
         FileReader file1 = new FileReader("doc1.txt");
         FileReader file2 = new FileReader("doc2.txt");
         FileReader file3 = new FileReader("doc3.txt");
+        
         
         
 
