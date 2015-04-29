@@ -1,0 +1,6 @@
+cat
+bat
+sat
+cat
+cat
+rat 
