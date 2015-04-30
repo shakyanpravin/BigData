@@ -9,15 +9,21 @@ package bigdata;
  *
  * @author 984338
  */
-public class MapFold_1 {
+public class MapFold_Contains0000 {
 
     public static int f(int x) {
-     //   return (x % 2 == 0) ? 1 : -1;
-        return (isPrime(x)==1 )? 1 : 0;
+     
+       return x==0?0:1;
     }
 
     public static int g(int x, int y) {
-        return x + y;
+        if(x<y&&y==0)
+            return x+1;
+        else if(x==5&&y==0)
+            return 5;
+        else if(x==4&&y==1)
+            return 6;
+        else if (x==6)
     }
 
     public static int isPrime(int n) {
