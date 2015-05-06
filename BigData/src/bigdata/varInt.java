@@ -70,15 +70,31 @@ public class varInt {
             System.out.print("\t");
         }
         System.out.println("");
+        ArrayList<Byte> array=new ArrayList<Byte>();
         for(int j=0;j<temp.length;j++)
         {
-            System.out.print(encodeInt(temp[j]));
-            System.out.print("\t");
+            
+            byte[] b =encodeInt(temp[j]);
+            int k=0;
+            while(k<b.length)
+            {
+               // for(byte bb:b)
+               // {
+                    array.add(b[k]);
+
+               // }
+                k++;
+            }
+      
         }
-        ArrayList<Byte> array =new ArrayList<Byte>();
-        
-        for(byte bb:)
-        return b;
+//        ArrayList<Byte> array =new ArrayList<Byte>();
+        byte[] arrayOfByte=new byte[array.size()];
+        for(int y=0;y<array.size();y++)
+        {
+            arrayOfByte[y]=array.get(y);
+        }
+       
+        return arrayOfByte;
     }
 
     public static int[] decode(byte[] code) {
@@ -102,7 +118,13 @@ public class varInt {
             System.out.print("\t");
         }
         System.out.println("");
-        encode(plist);
+        byte[] yeti=encode(plist);
+        for(int i=0;i<yeti.length;i++)
+        {
+            System.out.print(yeti[i]);
+            System.out.print("\t");
+        }
+        System.out.println("\n");
 
     }
 }
