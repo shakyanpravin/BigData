@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author 984338
  */
-public class varInt {
+public class varInt{
 
     public static int byteRequiredForInt(int n) {
         int size = 1;
@@ -55,50 +55,110 @@ public class varInt {
         return n;
     }
 
-    public static byte[] encode(int[] a) {
-	  // you can try this
-
-        int[] temp=new int[a.length];
+    public static int[] d_Gap(int[] a) {
+        int[] temp = new int[a.length];
         for (int i = 0; i < a.length; i++) {
-            temp[i]=a[i];
+            temp[i] = a[i];
             if (i % 2 == 0 && i != 0) {
                 temp[i] = a[i] - a[i - 2];
             }
         }
+        return temp;
+    }
+
+    public static int[] reverse_d_Gap(int[] a) {
+        int[] temp = new int[a.length];
+        for (int i = 0; i < a.length; i++) {
+            temp[i] = a[i];
+            if (i % 2 == 0 && i != 0) {
+                temp[i] = a[i] + a[i - 2];
+            }
+        }
+        return temp;
+    }
+
+    public static void display(int[] temp) {
         for (int i = 0; i < temp.length; i++) {
             System.out.print(temp[i]);
             System.out.print("\t");
         }
         System.out.println("");
-        ArrayList<Byte> array=new ArrayList<Byte>();
-        for(int j=0;j<temp.length;j++)
-        {
-            
-            byte[] b =encodeInt(temp[j]);
-            int k=0;
-            while(k<b.length)
-            {
-               // for(byte bb:b)
-               // {
-                    array.add(b[k]);
+    }
 
-               // }
-                k++;
+    public static void display(byte[] temp) {
+        for (int i = 0; i < temp.length; i++) {
+            System.out.print(toStringByte(temp[i]));
+            System.out.print("\t");
+        }
+        System.out.println("");
+    }
+
+    public static byte[] encode(int[] a) {
+        // you can try this
+        int[] temp = d_Gap(a);
+        display(temp);
+        ArrayList<Byte> array = new ArrayList<Byte>();
+        for (int j = 0; j < temp.length; j++) {
+
+            byte[] b = encodeInt(temp[j]);
+            int k = b.length - 1;
+            while (k >= 0) {
+                array.add(b[k]);
+                k--;
             }
-      
         }
-//        ArrayList<Byte> array =new ArrayList<Byte>();
-        byte[] arrayOfByte=new byte[array.size()];
-        for(int y=0;y<array.size();y++)
-        {
-            arrayOfByte[y]=array.get(y);
+        byte[] arrayOfByte = new byte[array.size()];
+        for (int y = 0; y < array.size(); y++) {
+            arrayOfByte[y] = array.get(y);
         }
-       
+
         return arrayOfByte;
     }
 
     public static int[] decode(byte[] code) {
         // you can try this
+        ArrayList<Integer> array = new ArrayList<Integer>();
+        int length = code.length;
+        byte[] newByte = new byte[length];
+        int check = -1;
+        for (int i = 0; i < length; i++) {
+
+            check = code[i] >> 1;
+            int temp = 0;
+            ArrayList<Byte> newArray = new ArrayList();
+            if (check == 0) {
+                while (check == 0) {
+                    newArray.add(code[i]);
+                    // temp = (byte) code[i] + (byte) code[i + 1];
+                    // array.add((byte) temp);
+                    int before = code[i + 1];
+                    code[i] = code[i + 1];
+                    check = before >> 1;
+                    length--;
+                }
+                byte[] ga = new byte[newArray.size()];
+                for (int l = 0; l < newArray.size(); l++) {
+
+                    ga[l] = (byte) newArray.get(l);
+                }
+                array.add(decodeInt(ga));
+            } else {
+                byte[] bnew = new byte[1];
+                for(byte a:bnew)
+                {
+                    a=code[i];
+                }
+               
+                array.add(decodeInt(bnew));
+            }
+
+        }
+        int[] newb = new int[array.size()];
+
+        for (int i = 0; i < length; i++) {
+            newb[i]  =  array.get(i);
+        }
+        return newb;
     }
 
     public static String toStringByte(byte b) {
@@ -113,18 +173,11 @@ public class varInt {
     public static void main(String[] args) {
         int[] plist = {100, 8, 150, 7, 300, 24, 500, 36};
         // you can add whatever you want
-        for (int i = 0; i < plist.length; i++) {
-            System.out.print(plist[i]);
-            System.out.print("\t");
-        }
-        System.out.println("");
-        byte[] yeti=encode(plist);
-        for(int i=0;i<yeti.length;i++)
-        {
-            System.out.print(yeti[i]);
-            System.out.print("\t");
-        }
-        System.out.println("\n");
+        display(plist);
+        byte[] yeti = encode(plist);
+        display(yeti);
+        int[] decoded = decode(yeti);
+        display(decoded);
 
     }
 }
