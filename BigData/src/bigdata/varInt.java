@@ -11,7 +11,7 @@ import java.util.ArrayList;
  *
  * @author 984338
  */
-public class varInt{
+public class varInt {
 
     public static int byteRequiredForInt(int n) {
         int size = 1;
@@ -119,18 +119,14 @@ public class varInt{
         // you can try this
         ArrayList<Integer> array = new ArrayList<Integer>();
         int length = code.length;
-        byte[] newByte = new byte[length];
         int check = -1;
         for (int i = 0; i < length; i++) {
-
             check = code[i] >> 1;
             int temp = 0;
             ArrayList<Byte> newArray = new ArrayList();
             if (check == 0) {
                 while (check == 0) {
                     newArray.add(code[i]);
-                    // temp = (byte) code[i] + (byte) code[i + 1];
-                    // array.add((byte) temp);
                     int before = code[i + 1];
                     code[i] = code[i + 1];
                     check = before >> 1;
@@ -144,11 +140,7 @@ public class varInt{
                 array.add(decodeInt(ga));
             } else {
                 byte[] bnew = new byte[1];
-                for(byte a:bnew)
-                {
-                    a=code[i];
-                }
-               
+                bnew[0] = code[i];
                 array.add(decodeInt(bnew));
             }
 
@@ -156,7 +148,7 @@ public class varInt{
         int[] newb = new int[array.size()];
 
         for (int i = 0; i < length; i++) {
-            newb[i]  =  array.get(i);
+            newb[i] = array.get(i);
         }
         return newb;
     }
